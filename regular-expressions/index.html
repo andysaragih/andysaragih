@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regular Expressions | Andy Septiawan Saragih</title>
+    <link rel="stylesheet" href="../css/output.css">
+</head>
+<body class="bg-black min-h-screen py-20 px-10">
+    <div class="w-full h-full max-w-screen mx-0">
+        <div class="flex justify-center">
+            <div class="flex-col">
+                <p class="text-white font-bold text-2xl text-center">Regular Expressions</p>
+                <p class="text-white text-md">Learning regular expression for Human Computer Interaction</p>
+            </div>
+        </div>
+    </div>
+    <div class="flex flex-wrap mt-10 px-5 gap-5">
+        <div class="w-[23rem]">
+            <label for="nik" class="font-semibold text-white block leading-6">NIK</label>
+            <div class="mt-2">
+                <input type="text" id="inputNIK" name="NIK" required class="block w-full rounded shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 p-2 py-1.5" placeholder="Masukkan NIK mu">
+                <p id="validasiNIK" class="mt-1"></p>
+            </div>
+        </div>
+        <div class="w-[23rem]">
+            <label for="nik" class="font-semibold text-white block leading-6">Nomor Plat Kendaraan</label>
+            <div class="mt-2">
+                <input type="text" id="inputPlat" name="Plat" required class="block w-full rounded shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 p-2 py-1.5" placeholder="Masukkan Nomor Plat mu">
+                <p id="validasiPlat" class="mt-1"></p>
+            </div>
+        </div>
+        <div class="w-[23rem]">
+            <label for="nik" class="font-semibold text-white block leading-6">Hanya Boleh Dua Kata</label>
+            <div class="mt-2">
+                <input type="text" id="inputDua" name="Dua" required class="block w-full rounded shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 p-2 py-1.5" placeholder="Masukkan Kata-Kata mu">
+                <p id="validasiDua" class="mt-1"></p>
+            </div>
+        </div>
+        <div class="w-[23rem]">
+            <label for="nik" class="font-semibold text-white block leading-6">Depan Belakang Hurufnya Sama (cth. Malam) </label>
+            <div class="mt-2">
+                <input type="text" id="inputSama" name="DepanBelakang" required class="block w-full rounded shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 p-2 py-1.5" placeholder="Masukkan Kata-Kata mu">
+                <p id="validasiSama" class="mt-1"></p>
+            </div>
+        </div>
+        <div class="w-[23rem]">
+            <label for="nik" class="font-semibold text-white block leading-6">Bilangan Positif</label>
+            <div class="mt-2">
+                <input type="text" id="inputPositif" name="Positif" required class="block w-full rounded shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 p-2 py-1.5" placeholder="Masukkan Angka">
+                <p id="validasiPositif" class="mt-1"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let regexInputNIK = document.getElementById("inputNIK");
+        let nikValidasi = document.getElementById("validasiNIK");
+
+        let regexInputPlat = document.getElementById("inputPlat");
+        let platValidasi = document.getElementById("validasiPlat");
+
+        let regexInputDua = document.getElementById("inputDua");
+        let duaValidasi = document.getElementById("validasiDua");
+
+        let regexInputSama = document.getElementById("inputSama");
+        let samaValidasi = document.getElementById("validasiSama");
+
+        let regexInputPositif = document.getElementById("inputPositif");
+        let positifValidasi = document.getElementById("validasiPositif");
+
+        const REGEX_NIK = new RegExp("^[0-9]{16}$");
+        const REGEX_PLAT = new RegExp("^[A-Z]{2} [0-9]{4} [A-Z]{2}$");
+        const REGEX_DUA = new RegExp("^[a-zA-Z]+ [a-zA-Z]+$");
+        const REGEX_SAMA = new RegExp("\\b(\\w)\\w*\\1\\b");
+        const REGEX_POSITIF = new RegExp("^[1-9]\\d*$");
+
+        regexInputNIK.addEventListener("input", () => {
+            handleInput(regexInputNIK, nikValidasi, REGEX_NIK);
+        });
+
+        regexInputPlat.addEventListener("input", () => {
+            handleInput(regexInputPlat, platValidasi, REGEX_PLAT);
+        });
+
+        regexInputDua.addEventListener("input", () => {
+            handleInput(regexInputDua, duaValidasi, REGEX_DUA);
+        });
+
+        regexInputSama.addEventListener("input", () => {
+            handleInput(regexInputSama, samaValidasi, REGEX_SAMA);
+        });
+
+        regexInputPositif.addEventListener("input", () => {
+            handleInput(regexInputPositif, positifValidasi, REGEX_POSITIF);
+        });
+
+        function handleInput(inputElement, validationElement, regex) {
+        if(inputElement.value === ""){
+            validationElement.classList.remove("text-green-500");
+            validationElement.classList.remove("text-red-500");
+            inputElement.classList.add("focus:ring-indigo-600");
+            inputElement.classList.remove("focus:ring-red-500");
+            inputElement.classList.remove("focus:ring-green-500");
+            inputElement.classList.add("ring-grey-300");
+            inputElement.classList.remove("ring-red-500");
+            inputElement.classList.remove("ring-green-500");
+            validationElement.innerHTML = "";
+        }else if(regex.test(inputElement.value)){
+            validationElement.classList.add("text-green-500");
+            validationElement.classList.remove("text-red-500");
+            inputElement.classList.remove("focus:ring-indigo-600");
+            inputElement.classList.remove("focus:ring-red-500");
+            inputElement.classList.add("focus:ring-green-500");
+            inputElement.classList.remove("ring-grey-300");
+            inputElement.classList.remove("ring-red-500");
+            inputElement.classList.add("ring-green-500");
+            validationElement.innerHTML = "Valid";
+        }else{
+            validationElement.classList.add("text-red-500");
+            validationElement.classList.remove("text-green-500");
+            inputElement.classList.remove("focus:ring-indigo-600");
+            inputElement.classList.remove("focus:ring-green-500");
+            inputElement.classList.add("focus:ring-red-500");
+            inputElement.classList.remove("ring-grey-300");
+            inputElement.classList.remove("ring-green-500");
+            inputElement.classList.add("ring-red-500");
+            validationElement.innerHTML = "Invalid";
+        }
+    }
+    </script>
+</body>
+</html>
