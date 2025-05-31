@@ -1,6 +1,5 @@
-### Hi there 👋
-### 🌱 I’m currently learning **ReactJS**
-### ⚡ Fun fact: I'm sleepy person
+### 
+### Code Your Life!
 > "Semangat sampai tamat"
 <!--
 **andysaragih/andysaragih** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
